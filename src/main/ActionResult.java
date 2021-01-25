@@ -2,6 +2,7 @@ package main;
 
 public enum ActionResult {
     SUCCESS("Action was successful"),
+    INCORRECT_PASSWORD("Password is incorrect! Try again"),
     INVALID_USERNAME("Username is invalid!"),
     INVALID_PASSWORD("Password is invalid!"),
     USERNAME_NOT_FOUND("Username is not found!"),
