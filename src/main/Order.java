@@ -7,5 +7,13 @@ public class Order {
     String username;
     int foodId;
     OrderState state;
-    Date orderedAt;
+    Date orderDate;
+
+    public Order(int id, String username, int foodId, OrderState state, Date orderDate) {
+        this.id = id;
+        this.username = username;
+        this.foodId = foodId;
+        this.state = state;
+        this.orderDate = orderDate;
+    }
 }
