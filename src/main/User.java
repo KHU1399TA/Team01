@@ -12,7 +12,7 @@ class User {
     Date lastLoginDate;
 
     public ActionResult login(String username, String password) {
-        int pass = password.hashCode();
+        String pass = password.hashCode();
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).username.equals(username)) {
                 if (user.get(i).password.equals(pass)) {
