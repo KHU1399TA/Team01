@@ -12,10 +12,10 @@ class User {
     Date lastLoginDate;
 
     public ActionResult login(String username, String password) {
-        String pass = password.hashCode();
+        int pass = password.hashCode();
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).username.equals(username)) {
-                if (users.get(i).password.equals(pass)) {
+                if (user.get(i).password.equals(pass)) {
                     return SUCCESS;
                 } else
                     return INCORRECT_PASSWORD;
