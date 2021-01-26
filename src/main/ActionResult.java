@@ -11,6 +11,9 @@ public enum ActionResult {
     FOOD_ALREADY_EXIST("Food is already exist!"),
     ORDER_NOT_FOUND("Order is not found!"),
     ORDER_ALREADY_EXIST("Order is already exist"),
+    ORDER_NOT_MADE("Order has not been made!"),
+    ORDER_NOT_CONFIRMED("Order has not been confirmed!"),
+    ORDER_NOT_COOKED("Order has not been cooked!"),
     UNKNOWN_ERROR("Sorry sir there is an unknown error!!!");
 
     String action;

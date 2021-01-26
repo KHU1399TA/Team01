@@ -4,7 +4,7 @@ import utils.FileManager;
 import java.util.ArrayList;
 
 public class Restaurant {
-	ArrayList<User> users = new ArrayList<User>();
-	ArrayList<Food> menu = new ArrayList<Food>();
-	ArrayList<Order> orders = new ArrayList<Order>();
+	public ArrayList<User> users = new ArrayList<User>();
+	public ArrayList<Food> menu = new ArrayList<Food>();
+	public ArrayList<Order> orders = new ArrayList<Order>();
 }
