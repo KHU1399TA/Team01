@@ -6,6 +6,8 @@ public class Order {
     int id;
     String username;
     int foodId;
-    OrderState state;
+    OrderState state = OrderState.MADE;
     Date orderedAt;
+
+   
 }
