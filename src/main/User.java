@@ -15,7 +15,7 @@ class User {
         String pass = password.hashCode();
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).username.equals(username)) {
-                if (user.get(i).password.equals(pass)) {
+                if (users.get(i).password.equals(pass)) {
                     return SUCCESS;
                 } else
                     return INCORRECT_PASSWORD;
