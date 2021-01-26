@@ -5,5 +5,6 @@ public class Main {
         Readfile r = new Readfile();
         Restaurant restaurant = new Restaurant();
         restaurant = r.read(restaurant);
+        System.out.println(restaurant.users.get(0));
     }
 }

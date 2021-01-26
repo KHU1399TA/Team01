@@ -30,7 +30,7 @@ public class Readfile {
                 restaurant.users.add(new Chef(line[0], line[1], line[2], line[3], line[4], AccessLevel.CHEF,
                         registrationDate, lastloginDate));
             } else if (line[5].equals("DE")) {
-                restaurant.users.add(new Deliveryman(line[0], line[1], line[2], line[3], line[4],
+                restaurant.users.add(new DeliveryMan(line[0], line[1], line[2], line[3], line[4],
                         AccessLevel.DELIVERYMAN, registrationDate, lastloginDate));
             } else {
                 restaurant.users.add(new Client(line[0], line[1], line[2], line[3], line[4], AccessLevel.CLIENT,
@@ -54,7 +54,7 @@ public class Readfile {
                 isAvailable = true;
             else
                 isAvailable = false;
-            restaurant.menu.add(new Food(line[0], line[1], ingredients, isAvailable));
+            restaurant.menu.add(new Food(Integer.parseInt(line[0]), line[1], ingredients, isAvailable));
         }
 
         fileManager = new FileManager(DATA_FILE_PATH_ORDER);
