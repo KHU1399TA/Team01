@@ -15,7 +15,8 @@ public enum ActionResult {
     ORDER_NOT_CONFIRMED("Order has not been confirmed!"),
     ORDER_NOT_COOKED("Order has not been cooked!"),
     ORDER_COOKED("You can't revoke your order because it has been cooked"),
-    UNKNOWN_ERROR("Sorry sir there is an unknown error!!!");
+    UNKNOWN_ERROR("Sorry sir there is an unknown error!!!"),
+    ROLE_NOT_MATCH("Your selected role does not match");
 
     String action;
 
