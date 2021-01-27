@@ -16,45 +16,65 @@ public class Manager extends User {
         this.lastLoginDate = lastLoginDate;
     }
 
-    ActionResult register(User user) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).username == user.username) {
-                return ActionResult.USERNAME_ALREADY_EXIST;
+    Resault register(User user, Restaurant restaurant) {
+        Resault resault;
+        resault.restaurant = restaurant;
+        for (int i = 0; i < restaurant.users.size(); i++) {
+            if (restaurant.users.get(i).username == user.username) {
+                resault.actionResult = ActionResult.USERNAME_ALREADY_EXIST;
+                return resault;
             }
         }
-        for (int i = 0; i < user.username.length(); i++) {
+        for (int i = 0; i < restaurant.user.username.length(); i++) {
             if (user.username.charAt(i) == ' ' || user.username.charAt(i) == '-') {
-                return ActionResult.INVALID_USERNAME;
+                resault.actionResult = ActionResult.INVALID_USERNAME;
+                return resault;
             }
         }
-        users.add(user);
-        return ActionResult.SUCCESS;
+        restaurant.users.add(user);
+        resault.restaurant = restaurant;
+        resault.actionResult = ActionResult.SUCCESS;
+        return resault;
     }
 
-    ActionResult edit(String username, String firstName, String lastName, String phoneNumber, String newUsername,
-            String newPassword, AccessLevel newAccessLevel) {
+    Resault edit(String username, String firstName, String lastName, String phoneNumber, String newUsername,
+            String newPassword, AccessLevel newAccessLevel, Restaurant restaurant) {
+        Resault resault;
+        resault.restaurant = restaurant;
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).username == username) {
-                users.get(i).firstName = firstName;
-                users.get(i).lastName = lastName;
-                users.get(i).phoneNumber = phoneNumber;
-                users.get(i).username = newUsername;
-                users.get(i).password = Integer.toString(newPassword.hashCode());
-                users.get(i).accessLevel = newAccessLevel;
-
-                return ActionResult.SUCCESS;
+            if (restaurant.users.get(i).username == username) {
+                if (!firstName.equals("0"))
+                    restaurant.users.get(i).firstName = firstName;
+                if (!lastName.equals("0"))
+                    restaurant.users.get(i).lastName = lastName;
+                if (!phoneNumber.equals("0"))
+                    restaurant.users.get(i).phoneNumber = phoneNumber;
+                if (!newUsername.equals("0"))
+                    restaurant.users.get(i).username = newUsername;
+                if (!newPassword.equals("0"))
+                    restaurant.users.get(i).password = Integer.toString(newPassword.hashCode());
+                restaurant.users.get(i).accessLevel = newAccessLevel;
+                resault.restaurant = restaurant;
+                resault.actionResult = ActionResult.SUCCESS;
+                return resault;
             }
         }
-        return ActionResult.USERNAME_NOT_FOUND;
+        resault.actionResult = ActionResult.USERNAME_NOT_FOUND;
+        return resault;
     }
 
-    ActionResult remove(String username) {
+    Resault remove(String username, Restaurant restaurant) {
+        Resault resault;
+        resault.restaurant = restaurant;
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).username == username) {
-                users.remove(i);
-                return ActionResult.SUCCESS;
+            if (restaurant.users.get(i).username == username) {
+                restaurant.users.remove(i);
+                resault.restaurant = restaurant;
+                resault.actionResult = ActionResult.SUCCESS;
+                return resault;
             }
         }
-        return ActionResult.USERNAME_NOT_FOUND;
+        resault.actionResult = ActionResult.USERNAME_NOT_FOUND;
+        return resault;
     }
 }

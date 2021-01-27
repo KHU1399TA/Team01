@@ -2,6 +2,7 @@ package main;
 
 import utils.FileManager;
 import java.util.ArrayList;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,13 +11,12 @@ public class Readfile {
     private static final String DATA_FILE_PATH_FOOD = "src/resources/foods.txt";
     private static final String DATA_FILE_PATH_ORDER = "src/resources/orders.txt";
 
-    public Restaurant read(Restaurant restaurant) {
+    public Restaurant read(Restaurant restaurant) throws ParseException {
         FileManager fileManager = new FileManager(DATA_FILE_PATH_USER);
         String content = fileManager.readAll();
-
+        System.out.println(content);
         String[] us = content.split("\n");
-
-        for (int i = 0; i < us.length; i++) {
+        for (int i = 0; i < 0; i++) {
             String[] line = us[i].split(";");
             Date registrationDate = new SimpleDateFormat("dd/MM/yyyy").parse(line[6]);
             Date lastloginDate = new SimpleDateFormat("dd/MM/yyyy").parse(line[7]);
@@ -41,8 +41,7 @@ public class Readfile {
         fileManager = new FileManager(DATA_FILE_PATH_FOOD);
         content = fileManager.readAll();
         us = content.split("\n");
-
-        for (int i = 0; i < us.length; i++) {
+        for (int i = 0; i < 0; i++) {
             String[] line = us[i].split(";");
             String[] ing = line[2].split("-");
             ArrayList<String> ingredients = new ArrayList<String>();
@@ -59,8 +58,8 @@ public class Readfile {
 
         fileManager = new FileManager(DATA_FILE_PATH_ORDER);
         content = fileManager.readAll();
-        us = content.split("\n");
-        for (int i = 0; i < us.length; i++) {
+        us = conten.split("\n");
+        for (int i = 0; i < 0; i++) {
             String[] line = us[i].split(";");
             OrderState state;
             Date orderdate = new SimpleDateFormat("dd/MM/yyyy").parse(line[4]);
