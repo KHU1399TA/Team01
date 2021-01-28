@@ -13,4 +13,10 @@ abstract class User {
     Date registrationDate = new Date();
     Date lastLoginDate = new Date();
 
+    @Override
+    public String toString() {
+        return username + " " + firstName + " " + lastName + " " + phoneNumber + " " + accessLevel + " ("
+                + registrationDate + ") (" + lastLoginDate + ")";
+    }
+
 }

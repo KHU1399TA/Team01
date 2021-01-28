@@ -1,1 +1,3 @@
-12;makaroni;pasta-goosht;Yes
+12;makaroni;pasta-goosht;Yes;3
+13;ghormesabzi;sabzi-goosht-loobia;No;10
+14;pitza;khamir-panir-goosht-;Yes;20

@@ -1,16 +1,11 @@
 package main;
 
 public enum AccessLevel {
-    MANAGER (1),
-    CASHIER(2),
-    CHEF(3) ,
-    DELIVERYMAN(4) ,
-    CLIENT(5);
+    MANAGER("Manager"), CHEF("Chef"), CASHIER("Cashier"), DELIVERYMAN("Deliveryman"), CLIENT("Client");
 
-    int id;
+    String id;
 
-    AccessLevel(int id) {
+    AccessLevel(String id) {
         this.id = id;
     }
 }
-

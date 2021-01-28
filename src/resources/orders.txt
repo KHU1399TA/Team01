@@ -1,1 +1,3 @@
-13;Ali;1256;CO;12/12/2000
+Alireza13;Alireza;13;2;MA;12/12/1999;krj
+Alireza12;Alireza;12;3;CN;12/12/1999;krj
+Alirezar14;Alirezar;14;3;CO;12/12/1999;krj

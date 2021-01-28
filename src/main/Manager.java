@@ -3,9 +3,9 @@ package main;
 import java.util.Date;
 
 public class Manager extends User {
-	
+
 	public Manager(String firstName, String lastName, String phoneNumber, String username, String password,
-	               AccessLevel accessLevel, Date registrationDate, Date lastLoginDate) {
+			AccessLevel accessLevel, Date registrationDate, Date lastLoginDate) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
@@ -15,7 +15,7 @@ public class Manager extends User {
 		this.registrationDate = registrationDate;
 		this.lastLoginDate = lastLoginDate;
 	}
-	
+
 	Resault register(User user, Restaurant restaurant) {
 		Resault resault = new Resault();
 		resault.restaurant = restaurant;
@@ -25,20 +25,21 @@ public class Manager extends User {
 				return resault;
 			}
 		}
-		for (int i = 0; i < restaurant.users.size(); i++) {
+		for (int i = 0; i < user.username.length(); i++) {
 			if (user.username.charAt(i) == ' ' || user.username.charAt(i) == '-') {
 				resault.actionResult = ActionResult.INVALID_USERNAME;
 				return resault;
 			}
 		}
+		user.password = Integer.toString(user.password.hashCode());
 		restaurant.users.add(user);
 		resault.restaurant = restaurant;
 		resault.actionResult = ActionResult.SUCCESS;
 		return resault;
 	}
-	
-	Resault edit(String username, String firstName, String lastName, String phoneNumber, String newUsername,
-	             String newPassword, AccessLevel newAccessLevel, Restaurant restaurant) {
+
+	Resault edit(String username, String firstName, String lastName, String phoneNumber, String newPassword,
+			AccessLevel newAccessLevel, Restaurant restaurant) {
 		Resault resault = new Resault();
 		resault.restaurant = restaurant;
 		for (int i = 0; i < restaurant.users.size(); i++) {
@@ -49,8 +50,6 @@ public class Manager extends User {
 					restaurant.users.get(i).lastName = lastName;
 				if (!phoneNumber.equals("0"))
 					restaurant.users.get(i).phoneNumber = phoneNumber;
-				if (!newUsername.equals("0"))
-					restaurant.users.get(i).username = newUsername;
 				if (!newPassword.equals("0"))
 					restaurant.users.get(i).password = Integer.toString(newPassword.hashCode());
 				restaurant.users.get(i).accessLevel = newAccessLevel;
@@ -62,7 +61,7 @@ public class Manager extends User {
 		resault.actionResult = ActionResult.USERNAME_NOT_FOUND;
 		return resault;
 	}
-	
+
 	Resault remove(String username, Restaurant restaurant) {
 		Resault resault = new Resault();
 		resault.restaurant = restaurant;
