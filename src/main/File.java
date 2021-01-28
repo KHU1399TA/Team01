@@ -83,8 +83,10 @@ public class File {
 	}
 
 	public void save(Restaurant restaurant) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		FileManager fileManager = new FileManager(DATA_FILE_PATH_USER);
 		String users = "";
+		String regdate, logdate;
 		for (int i = 0; i < restaurant.users.size(); i++) {
 			AccessLevel acclvl = restaurant.users.get(i).accessLevel;
 			String acc;
@@ -98,10 +100,15 @@ public class File {
 				acc = "DE";
 			else
 				acc = "CL";
+			regdate = formatter.format(restaurant.users.get(i).registrationDate);
+			logdate = formatter.format(restaurant.users.get(i).lastLoginDate);
 			users += restaurant.users.get(i).firstName + ";" + restaurant.users.get(i).lastName + ";"
 					+ restaurant.users.get(i).phoneNumber + ";" + restaurant.users.get(i).username + ";"
-					+ restaurant.users.get(i).password + ";" + acc + ";" + restaurant.users.get(i).registrationDate
-					+ ";" + restaurant.users.get(i).lastLoginDate;
+					+ restaurant.users.get(i).password + ";" + acc + ";" + regdate + ";" + logdate;
+			if (acclvl == AccessLevel.CLIENT) {
+				Client client = (Client) restaurant.users.get(i);
+				users += ";" + client.address;
+			}
 			if (i != restaurant.users.size() - 1)
 				users += "\n";
 		}
@@ -132,6 +139,7 @@ public class File {
 		String orders = "";
 		OrderState orderState;
 		String oState;
+		String oDate;
 		for (int i = 0; i < restaurant.orders.size(); i++) {
 			orderState = restaurant.orders.get(i).state;
 			if (orderState == OrderState.MADE)
@@ -142,9 +150,10 @@ public class File {
 				oState = "CO";
 			else
 				oState = "DE";
+			oDate = formatter.format(restaurant.orders.get(i).orderDate);
 			orders += restaurant.orders.get(i).id + ";" + restaurant.orders.get(i).username + ";"
 					+ restaurant.orders.get(i).foodId + ";" + restaurant.orders.get(i).numbers + ";" + oState + ";"
-					+ restaurant.orders.get(i).orderDate + ";" + restaurant.orders.get(i).address;
+					+ oDate + ";" + restaurant.orders.get(i).address;
 			if (i != restaurant.orders.size() - 1)
 				orders += "\n";
 		}
