@@ -21,7 +21,7 @@ public class Cashier extends User {
 		int foodId = 0;
 		resault.restaurant = restaurant;
 		for (int i = 0; i < restaurant.orders.size(); i++) {
-			if (restaurant.orders.get(i).id.equals(id)) {
+			if (restaurant.orders.get(i).id.equals(id) && restaurant.orders.get(i).state == OrderState.MADE) {
 
 				foodId = restaurant.orders.get(i).foodId;
 
