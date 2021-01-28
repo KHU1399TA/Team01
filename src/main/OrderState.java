@@ -1,10 +1,8 @@
 package main;
 
 public enum OrderState {
-    MADE("Your order has been made"),
-    CONFIRMED("Your order has been confirmed"),
-    COOKED("Your order has been cocked!"),
-    DELIVERED("Your order has been delivered!");
+    MADE("The order has been made"), CONFIRMED("The order has been confirmed"), COOKED("The order has been cooked!"),
+    DELIVERED("The order has been delivered!");
 
     String state;
 

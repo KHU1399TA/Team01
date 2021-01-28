@@ -9,9 +9,10 @@ public class Client extends User {
     public ArrayList<Order> orders = new ArrayList<Order>();
 
     String address;
+    Resault resault = new Resault();
 
     public Client(String firstName, String lastName, String phoneNumber, String username, String password,
-                  AccessLevel accessLevel, Date registrationDate, Date lastLoginDate, String address) {
+            AccessLevel accessLevel, Date registrationDate, Date lastLoginDate, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -23,31 +24,42 @@ public class Client extends User {
         this.address = address;
     }
 
-    ActionResult makeOrder(Order order) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).username.equals(order.username)) {
-
-                    orders.add(order);
-                    order.state = OrderState.MADE;
-                    order.orderDate = new Date();
-
-                    return ActionResult.SUCCESS;
-                }
-            }
-
-        return ActionResult.USERNAME_NOT_FOUND;
-    }
-
-    ActionResult revokeOrder(int id) {
-        for (int i = 0; i < orders.size(); i++) {
-            if (orders.get(i).id == id ) {
-                if (orders.get(i).state != OrderState.COOKED) {
-                    orders.remove(id);
-                    return ActionResult.SUCCESS;
-                } else
-                    return ActionResult.ORDER_COOKED;
+    Resault makeOrder(Order order, Restaurant restaurant) {
+        resault.restaurant = restaurant;
+        for (int i = 0; i < restaurant.orders.size(); i++) {
+            if (restaurant.orders.get(i).id.equals(order.id)) {
+                resault.actionResult = ActionResult.ORDER_ALREADY_EXIST;
+                return resault;
             }
         }
-       return ActionResult.ORDER_NOT_FOUND;
+        for (int i = 0; i < restaurant.menu.size(); i++) {
+            if (restaurant.menu.get(i).id == order.foodId) {
+                restaurant.orders.add(order);
+                resault.restaurant = restaurant;
+                resault = ActionResult.SUCCESS;
+                return resault;
+            }
+        }
+        resault.actionResult = ActionResult.FOOD_NOT_FOUND;
+        return resault;
+    }
+
+    Resault revokeOrder(String id, Restaurant restaurant, String username) {
+        resault.restaurant = restaurant;
+        for (int i = 0; i < restaurant.orders.size(); i++) {
+            if (restaurant.orders.get(i).id.equals(id) && restaurant.orders.get(i).username.equals(username)) {
+                if (restaurant.orders.get(i).state != OrderState.COOKED) {
+                    restaurant.orders.remove(i);
+                    resault.restaurant = restaurant;
+                    resault.actionResult = ActionResult.SUCCESS;
+                    return resault;
+                } else {
+                    resault.actionResult = ActionResult.ORDER_COOKED;
+                    return resault;
+                }
+            }
+        }
+        resault.actionResult = ActionResult.ORDER_NOT_FOUND;
+        return resault;
     }
 }
