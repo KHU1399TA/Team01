@@ -359,8 +359,24 @@ public class Main {
                     }
                     break;
                 case 2:
-                    register();
-                    break;
+                    String information;
+                    System.out.println("Enter Your information in following order:firstName lastName PhoneNumber Username Password address ");
+                    information = input.nextLine();
+                    String[] registerInfo = information.split(" ");
+
+                    Client client = new Client(registerInfo[0], registerInfo[1], registerInfo[2], registerInfo[3], registerInfo[4],
+                            AccessLevel.CLIENT, java.util.Calendar.getInstance().getTime(),
+                            java.util.Calendar.getInstance().getTime() , registerInfo[5] );
+
+                    register(client);
+
+
+
+
+
+
+
+
                 default:
                     r.save(restaurant);
                     System.out.println("Good Bye...");
@@ -388,7 +404,8 @@ public class Main {
         return ActionResult.USERNAME_NOT_FOUND;
     }
 
-    public static void register() {
+    public static void register(Client client) {
+
 
     }
 
