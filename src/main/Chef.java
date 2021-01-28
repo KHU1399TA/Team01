@@ -65,7 +65,7 @@ public class Chef extends User {
 
 	Resault changeFoodStatus(int id, Restaurant restaurant) {
 		resault.restaurant = restaurant;
-		for (int i = 0; i < menu.size(); i++) {
+		for (int i = 0; i < restaurant.menu.size(); i++) {
 			if (restaurant.menu.get(i).id == id) {
 				restaurant.menu.get(i).isAvailable = !restaurant.menu.get(i).isAvailable;
 				resault.actionResult = ActionResult.SUCCESS;

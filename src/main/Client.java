@@ -36,7 +36,7 @@ public class Client extends User {
             if (restaurant.menu.get(i).id == order.foodId) {
                 restaurant.orders.add(order);
                 resault.restaurant = restaurant;
-                resault = ActionResult.SUCCESS;
+                resault.actionResult = ActionResult.SUCCESS;
                 return resault;
             }
         }

@@ -20,7 +20,7 @@ public class Manager extends User {
 		Resault resault = new Resault();
 		resault.restaurant = restaurant;
 		for (int i = 0; i < restaurant.users.size(); i++) {
-			if (restaurant.users.get(i).username == user.username) {
+			if (restaurant.users.get(i).username.equals(user.username)) {
 				resault.actionResult = ActionResult.USERNAME_ALREADY_EXIST;
 				return resault;
 			}
@@ -43,7 +43,7 @@ public class Manager extends User {
 		Resault resault = new Resault();
 		resault.restaurant = restaurant;
 		for (int i = 0; i < restaurant.users.size(); i++) {
-			if (restaurant.users.get(i).username == username) {
+			if (restaurant.users.get(i).username.equals(username)) {
 				if (!firstName.equals("0"))
 					restaurant.users.get(i).firstName = firstName;
 				if (!lastName.equals("0"))
@@ -66,7 +66,7 @@ public class Manager extends User {
 		Resault resault = new Resault();
 		resault.restaurant = restaurant;
 		for (int i = 0; i < restaurant.users.size(); i++) {
-			if (restaurant.users.get(i).username == username) {
+			if (restaurant.users.get(i).username.equals(username)) {
 				restaurant.users.remove(i);
 				resault.restaurant = restaurant;
 				resault.actionResult = ActionResult.SUCCESS;

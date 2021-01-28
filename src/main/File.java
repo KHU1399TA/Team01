@@ -116,16 +116,16 @@ public class File {
 
 		fileManager = new FileManager(DATA_FILE_PATH_FOOD);
 		String isAvailable;
-		String ingredients = "";
 		String menu = "";
 		for (int i = 0; i < restaurant.menu.size(); i++) {
+			String ingredients = "";
 			if (restaurant.menu.get(i).isAvailable)
 				isAvailable = "Yes";
 			else
 				isAvailable = "No";
-			for (int j = 0; j < restaurant.menu.get(0).ingredients.length; i++) {
-				ingredients += restaurant.menu.get(0).ingredients[j];
-				if (j != restaurant.menu.get(0).ingredients.length - 1)
+			for (int j = 0; j < restaurant.menu.get(i).ingredients.length; j++) {
+				ingredients += restaurant.menu.get(i).ingredients[j];
+				if (j != restaurant.menu.get(i).ingredients.length - 1)
 					ingredients += "-";
 			}
 			menu += restaurant.menu.get(i).id + ";" + restaurant.menu.get(i).name + ";" + ingredients + ";"

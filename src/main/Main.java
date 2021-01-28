@@ -24,7 +24,8 @@ public class Main {
         ActionResult loginaction;
 
         do {
-            System.out.println("Wath you want to do?1.Login 2.Register 3.Exti");
+            System.out.println("What you want to do?1.Login 2.Register 3.Extit");
+            cuAccLvl = 0;
             action = input.nextInt();
             switch (action) {
                 case 1:
@@ -88,6 +89,7 @@ public class Main {
                                         showUsers(restaurant);
                                         System.out.println(
                                                 "Enter user's information in this order:Firstname Lastname Phonenumber Username Password ");
+                                        input.nextLine();
                                         info = input.nextLine();
                                         String[] newUser = info.split(" ");
                                         System.out.println(
@@ -122,6 +124,7 @@ public class Main {
                                             default:
                                                 acclvl = AccessLevel.CLIENT;
                                                 System.out.println("Enter user's address:");
+                                                input.nextLine();
                                                 String add = input.nextLine();
                                                 u = new Client(newUser[0], newUser[1], newUser[2], newUser[3],
                                                         newUser[4], acclvl, java.util.Calendar.getInstance().getTime(),
@@ -138,6 +141,7 @@ public class Main {
                                         uname = input.next();
                                         System.out.println(
                                                 "Enter user's new information in this order:Firstname Lastname Phonenumber Password if you dont want to change them enter 0");
+                                        input.nextLine();
                                         info = input.nextLine();
                                         String[] editedinfo = info.split(" ");
                                         System.out.println(
@@ -206,6 +210,7 @@ public class Main {
                                         System.out.println("Enter your food Name:");
                                         name = input.next();
                                         System.out.println("Enter your food ingredients with space between them:");
+                                        input.nextLine();
                                         ingredients = input.nextLine().split(" ");
                                         System.out.println("Enter the food status:1.Available 2.NotAvailable");
                                         avb = input.nextInt();
@@ -232,6 +237,7 @@ public class Main {
                                         System.out.println(
                                                 "Enter the new food name first (if you dont want to change it type the pervious name ) than next line Enter ingredients with space between them:");
                                         name = input.next();
+                                        input.nextLine();
                                         ingredients = input.nextLine().split(" ");
                                         System.out
                                                 .println("Enter the new price(if you dont want to change it enter -1)");
@@ -357,6 +363,7 @@ public class Main {
                     break;
                 default:
                     r.save(restaurant);
+                    System.out.println("Good Bye...");
                     break;
             }
         } while (action != 3);
