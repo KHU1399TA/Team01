@@ -10,6 +10,7 @@ public class Food {
     int price;
 
     public Food(int id, String name, String[] ingredients, boolean isAvailable, int price) {
+
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
@@ -19,16 +20,20 @@ public class Food {
 
     @Override
     public String toString() {
-        String ing = "";
+        String ingred = "";
+
         for (int i = 0; i < ingredients.length; i++) {
-            ing += ingredients[i] + " ";
+            ingred += ingredients[i] + " ";
         }
-        String avb;
+
+        String availability;
+
         if (isAvailable)
-            avb = "Available";
+            availability = "Available";
         else
-            avb = "Not Available";
-        return id + " " + name + " ( " + ing + ") " + avb + " " + price + "$";
+            availability = "Not Available";
+
+        return id + " " + name + " ( " + ingred + ") " + availability + " " + price + "$";
     }
 
 }

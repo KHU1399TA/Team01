@@ -6,6 +6,7 @@ public class Cashier extends User {
 
 	public Cashier(String firstName, String lastName, String phoneNumber, String username, String password,
 			AccessLevel accessLevel, Date registrationDate, Date lastLoginDate) {
+
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
@@ -18,20 +19,25 @@ public class Cashier extends User {
 
 	Resault ConfirmOrder(String id, Restaurant restaurant) {
 		Resault resault = new Resault();
-		int foodId = 0;
 		resault.restaurant = restaurant;
+
+		int foodId ;
+
 		for (int i = 0; i < restaurant.orders.size(); i++) {
-			if (restaurant.orders.get(i).id.equals(id) && restaurant.orders.get(i).state == OrderState.MADE) {
+			if (restaurant.orders.get(i).id.equals(id)) {
 
 				foodId = restaurant.orders.get(i).foodId;
 
 				for (int j = 0; j < restaurant.menu.size(); j++) {
 					if (restaurant.menu.get(j).id == foodId) {
 						if (restaurant.menu.get(i).isAvailable) {
+
 							restaurant.orders.get(i).state = OrderState.CONFIRMED;
+
 							resault.restaurant = restaurant;
 							resault.actionResult = ActionResult.SUCCESS;
 							return resault;
+
 						} else {
 							resault.actionResult = ActionResult.FOOD_NOT_AVAILABLE;
 							return resault;

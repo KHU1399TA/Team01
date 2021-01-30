@@ -13,6 +13,7 @@ public class Order {
 
     public Order(String id, String username, int foodId, int numbers, OrderState state, Date orderDate,
             String address) {
+
         this.id = id;
         this.username = username;
         this.foodId = foodId;

@@ -13,6 +13,7 @@ public class Client extends User {
 
     public Client(String firstName, String lastName, String phoneNumber, String username, String password,
             AccessLevel accessLevel, Date registrationDate, Date lastLoginDate, String address) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -26,15 +27,19 @@ public class Client extends User {
 
     Resault makeOrder(Order order, Restaurant restaurant) {
         resault.restaurant = restaurant;
+
         for (int i = 0; i < restaurant.orders.size(); i++) {
             if (restaurant.orders.get(i).id.equals(order.id)) {
+
                 resault.actionResult = ActionResult.ORDER_ALREADY_EXIST;
                 return resault;
             }
         }
         for (int i = 0; i < restaurant.menu.size(); i++) {
             if (restaurant.menu.get(i).id == order.foodId) {
+
                 restaurant.orders.add(order);
+
                 resault.restaurant = restaurant;
                 resault.actionResult = ActionResult.SUCCESS;
                 return resault;
@@ -46,14 +51,18 @@ public class Client extends User {
 
     Resault revokeOrder(String id, Restaurant restaurant, String username) {
         resault.restaurant = restaurant;
+
         for (int i = 0; i < restaurant.orders.size(); i++) {
             if (restaurant.orders.get(i).id.equals(id) && restaurant.orders.get(i).username.equals(username)) {
                 if (restaurant.orders.get(i).state != OrderState.COOKED) {
+
                     restaurant.orders.remove(i);
+
                     resault.restaurant = restaurant;
                     resault.actionResult = ActionResult.SUCCESS;
                     return resault;
-                } else {
+                }
+                else {
                     resault.actionResult = ActionResult.ORDER_COOKED;
                     return resault;
                 }
