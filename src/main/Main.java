@@ -443,7 +443,21 @@ public class Main {
         return ActionResult.USERNAME_NOT_FOUND;
     }
 
-    public static void register(Client client) {
+    public static void register(Client client) {import java.util.Scanner;
+
+     public class reg {
+     public static void main(String[] args) {
+        Scanner input=new Scanner(System.in);
+        System.out.println("please enter your userName");
+        String userName=//inja bayad dastor save to file manager ro bezani   }
+        System.out.println("please enter your password");
+        String password;
+        do {
+             password=//inja bayad dastor save to file manager ro bezani
+        }while (8 > password.length())
+        }
+        
+}
 
 
     }
