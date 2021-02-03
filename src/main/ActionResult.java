@@ -9,7 +9,8 @@ public enum ActionResult {
     ORDER_ALREADY_EXIST("Order is already exist"), ORDER_NOT_MADE("Order has not been made!"),
     ORDER_NOT_CONFIRMED("Order is not confirmed yet!"), ORDER_NOT_COOKED("Order has not been cooked!"),
     ORDER_COOKED("You can't revoke your order because it has been cooked"),
-    UNKNOWN_ERROR("Sorry sir there is an unknown error!!!"), ROLE_NOT_MATCH("Your selected role does not match");
+    UNKNOWN_ERROR("Sorry sir there is an unknown error!!!"), ROLE_NOT_MATCH("Your selected role does not match"),
+    NOT_MANAGER("Sorry you cannot edit or remove the Manager");
 
     String action;
 

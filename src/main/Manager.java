@@ -1,5 +1,6 @@
 package main;
 
+import java.security.interfaces.RSAKey;
 import java.util.Date;
 
 public class Manager extends User {
@@ -52,6 +53,10 @@ public class Manager extends User {
 
 		for (int i = 0; i < restaurant.users.size(); i++) {
 			if (restaurant.users.get(i).username.equals(username)) {
+				if (restaurant.users.get(i).accessLevel = AccessLevel.MANAGER) {
+					resault.actionResult = ActionResult.NOT_MANAGER;
+					return resault;
+				}
 
 				if (!firstName.equals("0"))
 					restaurant.users.get(i).firstName = firstName;
@@ -82,7 +87,10 @@ public class Manager extends User {
 
 		for (int i = 0; i < restaurant.users.size(); i++) {
 			if (restaurant.users.get(i).username.equals(username)) {
-
+				if (restaurant.users.get(i).accessLevel = AccessLevel.MANAGER) {
+					resault.actionResult = ActionResult.NOT_MANAGER;
+					return resault;
+				}
 				restaurant.users.remove(i);
 
 				resault.restaurant = restaurant;

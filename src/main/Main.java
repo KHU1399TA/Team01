@@ -83,31 +83,24 @@ public class Main {
                                         info = input.nextLine();
                                         String[] newUser = info.split(" ");
 
-                                        System.out.println(
-                                                "Enter user's role:1.Manager 2.Chef 3.Cashier 4.Deliveryman 5.Client");
+                                        System.out.println("Enter user's role:1.Chef 2.Cashier 3.Deliveryman 4.Client");
                                         lvl = input.nextInt();
 
                                         User u;
                                         switch (lvl) {
                                             case 1 -> {
-                                                acclvl = AccessLevel.MANAGER;
-                                                u = new Manager(newUser[0], newUser[1], newUser[2], newUser[3],
-                                                        newUser[4], acclvl, java.util.Calendar.getInstance().getTime(),
-                                                        java.util.Calendar.getInstance().getTime());
-                                            }
-                                            case 2 -> {
                                                 acclvl = AccessLevel.CHEF;
                                                 u = new Chef(newUser[0], newUser[1], newUser[2], newUser[3], newUser[4],
                                                         acclvl, java.util.Calendar.getInstance().getTime(),
                                                         java.util.Calendar.getInstance().getTime());
                                             }
-                                            case 3 -> {
+                                            case 2 -> {
                                                 acclvl = AccessLevel.CASHIER;
                                                 u = new Cashier(newUser[0], newUser[1], newUser[2], newUser[3],
                                                         newUser[4], acclvl, java.util.Calendar.getInstance().getTime(),
                                                         java.util.Calendar.getInstance().getTime());
                                             }
-                                            case 4 -> {
+                                            case 3 -> {
                                                 acclvl = AccessLevel.DELIVERYMAN;
                                                 u = new DeliveryMan(newUser[0], newUser[1], newUser[2], newUser[3],
                                                         newUser[4], acclvl, java.util.Calendar.getInstance().getTime(),
@@ -142,15 +135,14 @@ public class Main {
                                         info = input.nextLine();
                                         String[] editedInfo = info.split(" ");
 
-                                        System.out.println(
-                                                "Enter the new role:1.Manager 2.Chef 3.Cashier 4.Deliveryman 5.Client");
+                                        System.out
+                                                .println("Enter the new role:1.Chef 2.Cashier 3.Deliveryman 4.Client");
                                         lvl = input.nextInt();
 
                                         acclvl = switch (lvl) {
-                                            case 1 -> AccessLevel.MANAGER;
-                                            case 2 -> AccessLevel.CHEF;
-                                            case 3 -> AccessLevel.CASHIER;
-                                            case 4 -> AccessLevel.DELIVERYMAN;
+                                            case 1 -> AccessLevel.CHEF;
+                                            case 2 -> AccessLevel.CASHIER;
+                                            case 3 -> AccessLevel.DELIVERYMAN;
                                             default -> AccessLevel.CLIENT;
                                         };
                                         res = manager.edit(uname, editedInfo[0], editedInfo[1], editedInfo[2],
