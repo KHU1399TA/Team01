@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import javax.lang.model.util.ElementScanner14;
 
+import org.graalvm.compiler.nodes.NodeView.Default;
+
 import java.text.ParseException;
 
 public class Main {
@@ -377,7 +379,8 @@ public class Main {
                     String information;
 
                     System.out.println(
-                            "Enter Your information in following order :firstName lastName PhoneNumber Username Password Address (insted of spaces in address enter -");
+                            "Enter Your information in following order :firstName lastName PhoneNumber Username Password Address (insted of spaces in address enter -)");
+                    input.nextLine();
                     information = input.nextLine();
                     String[] registerInfo = information.split(" ");
 
@@ -432,12 +435,13 @@ public class Main {
                             }
                         } while (job != 3);
                     }
+                    break;
 
                 default:
                     r.save(restaurant);
-
                     System.out.println("Good Bye...");
                     break;
+
             }
         } while (action != 3);
         input.close();
@@ -452,20 +456,20 @@ public class Main {
             if (restaurant.users.get(i).username.equals(username)) {
                 if (restaurant.users.get(i).password.equals(pass)) {
                     currentUserindex = i;
-                    if (restaurant.users.get(i).accessLevel = AccessLevel.MANAGER) {
+                    if (restaurant.users.get(i).accessLevel == AccessLevel.MANAGER) {
                         cuAccLvl = 1;
                         currentUser = (Manager) restaurant.users.get(i);
-                    } else if (restaurant.users.get(i).accessLevel = AccessLevel.CHEF) {
+                    } else if (restaurant.users.get(i).accessLevel == AccessLevel.CHEF) {
                         cuAccLvl = 2;
                         currentUser = (Chef) restaurant.users.get(i);
-                    } else if (restaurant.users.get(i).accessLevel = AccessLevel.CASHIER) {
+                    } else if (restaurant.users.get(i).accessLevel == AccessLevel.CASHIER) {
                         cuAccLvl = 3;
                         currentUser = (Cashier) restaurant.users.get(i);
-                    } else if (restaurant.users.get(i).accessLevel = AccessLevel.DELIVERYMAN) {
+                    } else if (restaurant.users.get(i).accessLevel == AccessLevel.DELIVERYMAN) {
                         cuAccLvl = 4;
                         currentUser = (DeliveryMan) restaurant.users.get(i);
-                    } else if (restaurant.users.get(i).accessLevel = AccessLevel.CLIENT) {
-                        cuAccLvl = 1;
+                    } else if (restaurant.users.get(i).accessLevel == AccessLevel.CLIENT) {
+                        cuAccLvl = 5;
                         currentUser = (Client) restaurant.users.get(i);
                     }
 
