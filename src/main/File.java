@@ -7,9 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class File {
-    private static final String DATA_FILE_PATH_USER = "src/resources/users.txt";
-    private static final String DATA_FILE_PATH_FOOD = "src/resources/foods.txt";
-    private static final String DATA_FILE_PATH_ORDER = "src/resources/orders.txt";
+    private static final String DATA_FILE_PATH_USER = "../resources/users.txt";
+    private static final String DATA_FILE_PATH_FOOD = "../resources/foods.txt";
+    private static final String DATA_FILE_PATH_ORDER = "../resources/orders.txt";
 
     public Restaurant read(Restaurant restaurant) throws ParseException {
         FileManager fileManager = new FileManager(DATA_FILE_PATH_USER);
@@ -123,7 +123,6 @@ public class File {
                 users += "\n";
         }
         fileManager.write(users, false);
-
 
         fileManager = new FileManager(DATA_FILE_PATH_FOOD);
 

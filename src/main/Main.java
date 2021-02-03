@@ -1,11 +1,15 @@
 package main;
 
 import java.util.Scanner;
+
+import javax.lang.model.util.ElementScanner14;
+
 import java.text.ParseException;
 
 public class Main {
     static int currentUserindex;
     static User currentUser;
+    static int cuAccLvl;
 
     public static void main(String[] args) throws ParseException {
         Scanner input = new Scanner(System.in);
@@ -15,11 +19,6 @@ public class Main {
         Restaurant restaurant = new Restaurant();
         restaurant = r.read(restaurant);
 
-        showUsers(restaurant);
-        showMenu(restaurant);
-        showOrders(restaurant);
-
-        int cuAccLvl;
         int action;
         String username, password;
         ActionResult loginaction;
@@ -34,37 +33,14 @@ public class Main {
                 case 1:
                     while (cuAccLvl == 0) {
 
-                        System.out.println("Enter your role : 1.Manager 2.Chef 3.Cashier 4.Deliveryman 5.Client");
-                        int a = input.nextInt();
-
                         System.out.println("Enter your username:");
                         username = input.next();
 
                         System.out.println("Enter your password:");
                         password = input.next();
 
-                        switch (a) {
-                            case 1 -> {
-                                loginaction = login(username, password, AccessLevel.MANAGER, restaurant);
-                                cuAccLvl = 1;
-                            }
-                            case 2 -> {
-                                loginaction = login(username, password, AccessLevel.CHEF, restaurant);
-                                cuAccLvl = 2;
-                            }
-                            case 3 -> {
-                                loginaction = login(username, password, AccessLevel.CASHIER, restaurant);
-                                cuAccLvl = 3;
-                            }
-                            case 4 -> {
-                                loginaction = login(username, password, AccessLevel.DELIVERYMAN, restaurant);
-                                cuAccLvl = 4;
-                            }
-                            default -> {
-                                loginaction = login(username, password, AccessLevel.CLIENT, restaurant);
-                                cuAccLvl = 5;
-                            }
-                        }
+                        loginaction = login(username, password, restaurant);
+
                         System.out.println(loginaction);
 
                         if (loginaction == ActionResult.SUCCESS) {
@@ -400,16 +376,62 @@ public class Main {
                 case 2:
                     String information;
 
-                    System.out.println("Enter Your information in following order :firstName lastName PhoneNumber Username Password address ");
+                    System.out.println(
+                            "Enter Your information in following order :firstName lastName PhoneNumber Username Password Address (insted of spaces in address enter -");
                     information = input.nextLine();
                     String[] registerInfo = information.split(" ");
 
-                    Client client = new Client(registerInfo[0], registerInfo[1], registerInfo[2], registerInfo[3], registerInfo[4],
-                            AccessLevel.CLIENT, java.util.Calendar.getInstance().getTime(),
+                    Client client = new Client(registerInfo[0], registerInfo[1], registerInfo[2], registerInfo[3],
+                            registerInfo[4], AccessLevel.CLIENT, java.util.Calendar.getInstance().getTime(),
                             java.util.Calendar.getInstance().getTime(), registerInfo[5]);
 
-                    register(client);
+                    res = register(client, restaurant);
+                    System.out.println(res.actionResult);
+                    if (res.actionResult == ActionResult.SUCCESS) {
+                        restaurant = res.restaurant;
+                        int number;
+                        Order order;
+                        int id;
+                        String orderId;
 
+                        do {
+                            System.out.println("What you want to do?1.Make an order 2.Revoke an order 3.Logout");
+                            job = input.nextInt();
+
+                            switch (job) {
+                                case 1 -> {
+                                    showMenu(restaurant);
+
+                                    System.out.println("Enter the foodID of the food that you want:");
+                                    id = input.nextInt();
+
+                                    System.out.println("Enter the number of food you want:");
+                                    number = input.nextInt();
+
+                                    order = new Order(client.username + id, client.username, id, number,
+                                            OrderState.MADE, java.util.Calendar.getInstance().getTime(),
+                                            client.address);
+
+                                    res = client.makeOrder(order, restaurant);
+
+                                    System.out.println(res.actionResult);
+                                    restaurant = res.restaurant;
+                                }
+                                case 2 -> {
+                                    showClientOrders(restaurant, client.username);
+
+                                    System.out.println("Enter the orderID that you want to revoke");
+                                    orderId = input.next();
+
+                                    res = client.revokeOrder(orderId, restaurant, client.username);
+
+                                    System.out.println(res.actionResult);
+                                    restaurant = res.restaurant;
+                                }
+                                default -> logout();
+                            }
+                        } while (job != 3);
+                    }
 
                 default:
                     r.save(restaurant);
@@ -419,23 +441,35 @@ public class Main {
             }
         } while (action != 3);
         input.close();
+
     }
 
-    public static ActionResult login(String username, String password, AccessLevel accessLevel, Restaurant restaurant) {
+    public static ActionResult login(String username, String password, Restaurant restaurant) {
         String pass = Integer.toString(password.hashCode());
 
         for (int i = 0; i < restaurant.users.size(); i++) {
 
             if (restaurant.users.get(i).username.equals(username)) {
                 if (restaurant.users.get(i).password.equals(pass)) {
-                    if (restaurant.users.get(i).accessLevel == accessLevel) {
+                    currentUserindex = i;
+                    if (restaurant.users.get(i).accessLevel = AccessLevel.MANAGER) {
+                        cuAccLvl = 1;
+                        currentUser = (Manager) restaurant.users.get(i);
+                    } else if (restaurant.users.get(i).accessLevel = AccessLevel.CHEF) {
+                        cuAccLvl = 2;
+                        currentUser = (Chef) restaurant.users.get(i);
+                    } else if (restaurant.users.get(i).accessLevel = AccessLevel.CASHIER) {
+                        cuAccLvl = 3;
+                        currentUser = (Cashier) restaurant.users.get(i);
+                    } else if (restaurant.users.get(i).accessLevel = AccessLevel.DELIVERYMAN) {
+                        cuAccLvl = 4;
+                        currentUser = (DeliveryMan) restaurant.users.get(i);
+                    } else if (restaurant.users.get(i).accessLevel = AccessLevel.CLIENT) {
+                        cuAccLvl = 1;
+                        currentUser = (Client) restaurant.users.get(i);
+                    }
 
-                        currentUserindex = i;
-                        currentUser = restaurant.users.get(i);
-
-                        return ActionResult.SUCCESS;
-                    } else
-                        return ActionResult.ROLE_NOT_MATCH;
+                    return ActionResult.SUCCESS;
                 } else
                     return ActionResult.INCORRECT_PASSWORD;
             }
@@ -443,23 +477,33 @@ public class Main {
         return ActionResult.USERNAME_NOT_FOUND;
     }
 
-    public static void register(Client client) {import java.util.Scanner;
-
-     public class reg {
-     public static void main(String[] args) {
-        Scanner input=new Scanner(System.in);
-        System.out.println("please enter your userName");
-        String userName=//inja bayad dastor save to file manager ro bezani   }
-        System.out.println("please enter your password");
-        String password;
-        do {
-             password=//inja bayad dastor save to file manager ro bezani
-        }while (8 > password.length())
+    public static Resault register(Client client, Restaurant restaurant) {
+        Resault resault = new Resault();
+        resault.restaurant = restaurant;
+        for (int i = 0; i < restaurant.users.size(); i++) {
+            if (restaurant.users.get(i).username.equals(client.username)) {
+                resault.actionResult = ActionResult.USERNAME_ALREADY_EXIST;
+                return resault;
+            }
         }
-        
-}
-
-
+        for (int i = 0; i < client.username.length(); i++) {
+            if (client.username.charAt(i) == ' ' || client.username.charAt(i) == '@' || client.username.charAt(i) == '%'
+                    || client.username.charAt(i) == '^' || client.username.charAt(i) == '&'
+                    || client.username.charAt(i) == '*') {
+                resault.actionResult = ActionResult.INVALID_USERNAME;
+                return resault;
+            }
+        }
+        for (int i = 0; i < client.password.length(); i++) {
+            if (client.password.charAt(i) == ' ') {
+                resault.actionResult = ActionResult.INVALID_PASSWORD;
+                return resault;
+            }
+        }
+        client.password = Integer.toString(client.password.hashCode());
+        resault.restaurant.users.add(client);
+        resault.actionResult = ActionResult.SUCCESS;
+        return resault;
     }
 
     public static void showUsers(Restaurant restaurant) {
